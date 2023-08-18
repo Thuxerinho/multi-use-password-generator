@@ -19,14 +19,17 @@ def generator():
     password = ""
 
     for i in range(length - special - numbers):
-        password += chr(random.randint(97, 122))
-        if password[i] == ")" or password[i] == "(": # This is to avoid the password having parenthesis
-            password[i] = chr(random.randint(97, 122))
-        else:
-            continue
+        password += chr(random.randint(97, 122)) # Lowercase letters
 
     for i in range(special):
         password += chr(random.randint(33, 47)) # Special characters
+        while password[i + (length - special - numbers)] in (")", "(", '"', "'"): # It checks if a character is a parenthesis or a quotation mark and removes it
+            password = password[:-1]
+            password += chr(random.randint(33, 47))
+        else:
+            continue
+                
+                
 
     for i in range(numbers):
         password += chr(random.randint(48, 57)) # Numbers
